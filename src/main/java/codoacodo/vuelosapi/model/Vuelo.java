@@ -1,7 +1,14 @@
 package codoacodo.vuelosapi.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDateTime;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Vuelo {
 
     private Long id;
@@ -11,5 +18,4 @@ public class Vuelo {
     private LocalDateTime fechaHoraLlegada;
     private double precio;
     private String frecuencia;
-
 }
