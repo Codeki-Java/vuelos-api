@@ -47,8 +47,8 @@ public class FlightController {
      */
 
     @GetMapping("/ofertas")
-    public List<Flight> getOffers() {
-        int offerPrice = 200000;
+    public List<Flight> getOffers(@RequestParam (name="precio") int offerPrice) {
+       // int offerPrice = 200000;
 
         return flightService.getOffers(offerPrice);
     }
