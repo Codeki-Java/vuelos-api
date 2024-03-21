@@ -56,13 +56,13 @@ public class FlightService {
     }
 
     //Version simple
-    /*public List<Flight> getByOrigen(String origen){
+    public List<Flight> getByOrigen(String origen){
         return flightRepository.findByOrigen(origen);
-    }*/
+    }
 
 
     //Version usando .stream()
-    public List<Flight> getByOrigen(String origen) {
+   /* public List<Flight> getByOrigen(String origen) {
         //Traigo todos los vuelos
         List<Flight> flights = flightRepository.findAll();
 
@@ -72,5 +72,10 @@ public class FlightService {
                 .collect(Collectors.toList());
 
         return flightByOrigen;
+    }*/
+
+     public List<Flight> getByOrigenAndDestino(String origen, String destino){
+        return flightRepository.findByOrigenAndDestino(origen, destino);
     }
+
 }

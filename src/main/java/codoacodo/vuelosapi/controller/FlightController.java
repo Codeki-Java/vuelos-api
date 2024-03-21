@@ -47,8 +47,13 @@ public class FlightController {
     }
 
     @GetMapping("/origen")
-    public List<Flight> getByOrigen(@RequestParam (name="origen") String origen) {
+    public List<Flight> getByLocations(@RequestParam String origen) {
         return flightService.getByOrigen(origen);
+    }
+
+    @GetMapping("/locations")
+    public List<Flight> getByLocations(@RequestParam String origen, @RequestParam String destino) {
+        return flightService.getByOrigenAndDestino(origen, destino);
     }
 
 }
