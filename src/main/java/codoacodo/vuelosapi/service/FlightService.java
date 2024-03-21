@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -52,5 +53,24 @@ public class FlightService {
             }
         }
         return offerFlights;
+    }
+
+    //Version simple
+    /*public List<Flight> getByOrigen(String origen){
+        return flightRepository.findByOrigen(origen);
+    }*/
+
+
+    //Version usando .stream()
+    public List<Flight> getByOrigen(String origen) {
+        //Traigo todos los vuelos
+        List<Flight> flights = flightRepository.findAll();
+
+        //recorro los vuelos que traje y agrego los que tienen ese origen
+        List<Flight> flightByOrigen = flights.stream()
+                .filter(f -> f.getOrigen().equals(origen))
+                .collect(Collectors.toList());
+
+        return flightByOrigen;
     }
 }

@@ -40,17 +40,15 @@ public class FlightController {
         return flightService.actualizarVuelo(flight);
     }
 
-    /*
-    Generar endpoint llamado ofertas a traves de @RequestParam, recibe un valor
-    numerico y debemos retornar los vuelos con precio menor o igual a ese valor
-
-     */
 
     @GetMapping("/ofertas")
     public List<Flight> getOffers(@RequestParam (name="precio") int offerPrice) {
-       // int offerPrice = 200000;
-
         return flightService.getOffers(offerPrice);
+    }
+
+    @GetMapping("/origen")
+    public List<Flight> getByOrigen(@RequestParam (name="origen") String origen) {
+        return flightService.getByOrigen(origen);
     }
 
 }
