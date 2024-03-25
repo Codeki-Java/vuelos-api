@@ -1,10 +1,10 @@
 package codoacodo.vuelosapi.repository;
 
 import codoacodo.vuelosapi.model.Flight;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
@@ -13,12 +13,10 @@ import java.util.Optional;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class FlightRepositoryTest {
 
     @Autowired
     private FlightRepository flightRepository;
-
 
     private Flight flight;
 
@@ -27,10 +25,14 @@ public class FlightRepositoryTest {
         flight = new Flight("COR", "ROS","23/5/24","8:00",20000,"diaria");
     }
 
+    @AfterEach
+    void tearDown() {
+        flightRepository.deleteAll(); // Limpiar todos los datos después de cada prueba
+    }
+
     @Test
     void saveFlightTest(){
         //configuracion previa
-
 
         //llamar la funcionalidad
         Flight flightBD = flightRepository.save(flight);
@@ -99,13 +101,35 @@ public class FlightRepositoryTest {
         //verificar
         assertThat(flightUpdated.getOrigen()).isEqualTo("ROS");
         assertThat(flightUpdated.getPrecio()).isEqualTo(18000);
-
     }
 
-    //Testaer flightByOrigin
-    //guardar 3 vuelos, con origenes distintos
-    //evaluar que traiga el que tiene origen COR
+    @Test
+    void findByOrigen() {
+        //configuracion previa
+        Flight flight2 = new Flight("BUE","MDZ", "12/5/24","9:00",23000,"diaria");
+
+        flightRepository.save(flight);
+        flightRepository.save(flight2);
 
 
+        //llamar la funcionalidad
+        List<Flight> flightFromBUE = flightRepository.findByOrigen("BUE");
 
+        // verificar la salida o el comportamiento
+        assertThat(flightFromBUE).isNotNull();
+    }
+
+    @Test
+    void findByOrigenAndDestino() {
+        Flight flight2 = new Flight("BUE","MDZ", "12/5/24","9:00",23000,"diaria");
+
+        flightRepository.save(flight);
+        flightRepository.save(flight2);
+
+        //llamar la funcionalidad
+        List<Flight> flightFromBUEToMDZ = flightRepository.findByOrigenAndDestino("BUE","MDZ");
+
+        // verificar la salida o el comportamiento
+        assertThat(flightFromBUEToMDZ).isNotNull();
+    }
 }

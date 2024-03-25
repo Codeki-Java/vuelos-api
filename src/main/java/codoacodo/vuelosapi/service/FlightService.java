@@ -2,6 +2,7 @@ package codoacodo.vuelosapi.service;
 
 import codoacodo.vuelosapi.model.Flight;
 import codoacodo.vuelosapi.repository.FlightRepository;
+import codoacodo.vuelosapi.utils.FlightUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,10 @@ public class FlightService {
 
     @Autowired
     FlightRepository flightRepository;
+
+    @Autowired
+    FlightUtils flightUtils;
+
 
     public List<Flight> traerTodosLosVuelos() {
         return flightRepository.findAll();
@@ -38,21 +43,11 @@ public class FlightService {
         return flightRepository.findById(flight.getId());
     }
 
-
     public List<Flight> getOffers(Integer offerPrice) {
         //Traigo todos los vuelos
         List<Flight> flights= flightRepository.findAll();
 
-        //Armo una lista de ofertas
-        List<Flight> offerFlights = new ArrayList<>();
-
-        //recorro los vuelos que traje y agrego los que son oferta
-        for(Flight flight : flights){
-            if(flight.getPrecio() <= offerPrice) {
-                offerFlights.add(flight);
-            }
-        }
-        return offerFlights;
+        return flightUtils.detectOffers(flights, offerPrice);
     }
 
     //Version simple

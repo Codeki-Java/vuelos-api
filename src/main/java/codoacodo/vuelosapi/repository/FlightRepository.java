@@ -12,6 +12,5 @@ public interface FlightRepository extends JpaRepository<Flight, Long> {
 
    //Se usa si en el service uso la version sin .stream()
    List<Flight> findByOrigen(String origen);
-
-    List<Flight> findByOrigenAndDestino(String origen, String destino);
+   List<Flight> findByOrigenAndDestino(String origen, String destino);
 }
