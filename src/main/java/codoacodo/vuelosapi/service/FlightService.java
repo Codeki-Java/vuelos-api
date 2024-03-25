@@ -1,5 +1,7 @@
 package codoacodo.vuelosapi.service;
 
+import codoacodo.vuelosapi.configuration.FlightConfiguration;
+import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
 import codoacodo.vuelosapi.repository.FlightRepository;
 import codoacodo.vuelosapi.utils.FlightUtils;
@@ -16,6 +18,9 @@ public class FlightService {
 
     @Autowired
     FlightRepository flightRepository;
+
+    @Autowired
+    FlightConfiguration flightConfiguration;
 
     @Autowired
     FlightUtils flightUtils;
@@ -73,4 +78,7 @@ public class FlightService {
         return flightRepository.findByOrigenAndDestino(origen, destino);
     }
 
+    public double getDolarPrice() {
+         return flightConfiguration.fetchDolar().getPromedio();
+    }
 }
