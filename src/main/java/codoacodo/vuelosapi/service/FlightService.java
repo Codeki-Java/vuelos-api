@@ -3,6 +3,7 @@ package codoacodo.vuelosapi.service;
 import codoacodo.vuelosapi.configuration.FlightConfiguration;
 import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
+import codoacodo.vuelosapi.model.FlightDto;
 import codoacodo.vuelosapi.repository.FlightRepository;
 import codoacodo.vuelosapi.utils.FlightUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +27,10 @@ public class FlightService {
     FlightUtils flightUtils;
 
 
-    public List<Flight> traerTodosLosVuelos() {
-        return flightRepository.findAll();
-
+    public List<FlightDto> traerTodosLosVuelos() {
+        return flightRepository.findAll().stream()
+                .map(flight -> flightUtils.flightMapper(flight, getDolarPrice()))
+                .collect(Collectors.toList());
     }
 
     public void crearVuelo(Flight flight) {
@@ -78,7 +80,12 @@ public class FlightService {
         return flightRepository.findByOrigenAndDestino(origen, destino);
     }
 
-    public double getDolarPrice() {
-         return flightConfiguration.fetchDolar().getPromedio();
+    private double getDolarPrice() {
+         Dolar dolar = flightConfiguration.fetchDolar();
+         return dolar.getPromedio();
+    }
+
+    public List<Dolar> getAllDolars() {
+         return List.of(flightConfiguration.fetchAllDolars());
     }
 }
