@@ -28,9 +28,10 @@ public class FlightService {
 
 
     public List<FlightDto> traerTodosLosVuelos() {
-        return flightRepository.findAll().stream()
-                .map(flight -> flightUtils.flightMapper(flight, getDolarPrice()))
-                .collect(Collectors.toList());
+        double dolarPrice = getDolarPrice();
+        List<Flight> flights = flightRepository.findAll();
+        return flightUtils.flightMapper(flights, dolarPrice);
+
     }
 
     public void crearVuelo(Flight flight) {
