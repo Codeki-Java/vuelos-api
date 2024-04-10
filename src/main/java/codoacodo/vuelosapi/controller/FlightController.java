@@ -17,6 +17,7 @@ public class FlightController {
     @Autowired
     FlightService flightService;
 
+    @CrossOrigin
     @GetMapping("")
     public List<FlightDto> getAllFlights() {
         return flightService.traerTodosLosVuelos();

@@ -9,10 +9,8 @@ import codoacodo.vuelosapi.utils.FlightUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -82,11 +80,11 @@ public class FlightService {
     }
 
     private double getDolarPrice() {
-         Dolar dolar = flightConfiguration.fetchDolar();
+         Dolar dolar = flightUtils.fetchDolar();
          return dolar.getPromedio();
     }
 
     public List<Dolar> getAllDolars() {
-         return List.of(flightConfiguration.fetchAllDolars());
+         return List.of(flightUtils.fetchAllDolars());
     }
 }

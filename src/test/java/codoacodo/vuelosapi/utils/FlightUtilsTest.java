@@ -1,5 +1,7 @@
 package codoacodo.vuelosapi.utils;
 
+import codoacodo.vuelosapi.model.Company;
+import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
 import codoacodo.vuelosapi.model.FlightDto;
 import org.junit.jupiter.api.AfterEach;
@@ -10,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 @SpringBootTest
 class FlightUtilsTest {
@@ -57,7 +60,10 @@ class FlightUtilsTest {
         double dolarPrice = 1015;
 
         //Creo 1 vuelo
-        Flight flight1 = new Flight(1L,"BUE","MDZ", "4/5/24 10hs","4/5/24 11hs",32000,"semanal");
+     //   Flight flight1 = new Flight(1L,"BUE","NQN", "25/4/24 12hs", "25/4/24 13hs",20000, "semanal");
+
+        Company company = new Company("AA", "logo1");
+        Flight flight1 = new Flight(1L, "BUE", "NQN", "25/4/24 12hs", "25/4/24 13hs", 20000, "semanal", company);
 
         //armo lista con el vuelo
         flightList = new ArrayList<>();
@@ -70,6 +76,32 @@ class FlightUtilsTest {
 
         //verifico si el primer FlightDto tiene id 1
         assertEquals(1, flightDto.getId());
+        assertEquals(flight1.getPrecio() * dolarPrice, flightDto.getConvertedPrice());
 
     }
+
+    @Test
+    void fetchDolarTest(){
+
+        //Genero el contexto
+        Dolar dummyDolar = new Dolar();
+
+        dummyDolar.setMoneda("USD");
+        dummyDolar.setCasa("tarjeta");
+        dummyDolar.setNombre("Tarjeta");
+        dummyDolar.setVenta(1000.00);
+        dummyDolar.setCompra(1200.00);
+
+        FlightUtils mockedFlightUtils = mock(FlightUtils.class); //creo un objeto simulado de FlightUtils
+
+        when(mockedFlightUtils.fetchDolar()).thenReturn(dummyDolar);
+
+        //Llamo la funcionalidad
+        Dolar dolar = mockedFlightUtils.fetchDolar();
+
+        //Verificaciones
+      //  assertEquals(1100, dolar.getPromedio());
+        verify(1100);
+    }
+
 }

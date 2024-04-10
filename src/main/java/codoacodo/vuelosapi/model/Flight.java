@@ -1,9 +1,6 @@
 package codoacodo.vuelosapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,7 +20,9 @@ public class Flight {
     private String fechaHoraLlegada;
     private double precio;
     private String frecuencia;
-
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     public Flight(String origen, String destino, String fechaHoraSalida, String fechaHoraLlegada, double precio, String frecuencia) {
         this.origen = origen;
