@@ -1,5 +1,6 @@
 package codoacodo.vuelosapi.controller;
 
+import codoacodo.vuelosapi.model.Company;
 import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
 import codoacodo.vuelosapi.model.FlightDto;
@@ -12,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/vuelos")
+
 public class FlightController {
 
     @Autowired
@@ -28,9 +30,10 @@ public class FlightController {
         return flightService.buscarVueloPorId(id);
     }
 
+    //Paso el vuelo por el body del JSON y el companyId por parámetro
     @PostMapping("/agregar")
-    public void createFlight(@RequestBody Flight flight) {
-        flightService.crearVuelo(flight);
+    public void createFlight(@RequestBody Flight flight, @RequestParam Long companyId) {
+        flightService.crearVuelo(flight, companyId);
     }
 
     @DeleteMapping("/eliminar/{id}")

@@ -1,5 +1,6 @@
 package codoacodo.vuelosapi.service;
 
+import codoacodo.vuelosapi.exceptions.ResourceNotFoundException;
 import codoacodo.vuelosapi.model.Company;
 import codoacodo.vuelosapi.repository.CompanyRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,9 @@ public class CompanyService {
         return companyRepository.findById(id);
     }
 
-    public void deleteCompany(Long id) {
-        companyRepository.deleteById(id);
+    public void deleteCompany(Long id) throws ResourceNotFoundException {
+        Company company = companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company", "id", id));
+        companyRepository.deleteById(company.getId());
     }
 
     public Optional<Company> updateCompany(Company company) {

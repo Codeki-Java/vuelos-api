@@ -1,9 +1,12 @@
 package codoacodo.vuelosapi.service;
 
 import codoacodo.vuelosapi.configuration.FlightConfiguration;
+import codoacodo.vuelosapi.exceptions.ResourceNotFoundException;
+import codoacodo.vuelosapi.model.Company;
 import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
 import codoacodo.vuelosapi.model.FlightDto;
+import codoacodo.vuelosapi.repository.CompanyRepository;
 import codoacodo.vuelosapi.repository.FlightRepository;
 import codoacodo.vuelosapi.utils.FlightUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class FlightService {
     FlightRepository flightRepository;
 
     @Autowired
+    CompanyRepository companyRepository;
+
+    @Autowired
     FlightConfiguration flightConfiguration;
 
     @Autowired
@@ -31,8 +37,11 @@ public class FlightService {
         return flightUtils.flightMapper(flights, dolarPrice);
 
     }
-
-    public void crearVuelo(Flight flight) {
+//Todo: agregar Company Long id en la creacion del vuelo
+    public void crearVuelo(Flight flight, Long companyId) {
+        Company company = companyRepository.findById(companyId)
+                .orElseThrow(() -> new ResourceNotFoundException("flight", "id", companyId));
+        flight.setCompany(company);
         flightRepository.save(flight);
     }
 

@@ -31,5 +31,8 @@ public class Flight {
         this.fechaHoraLlegada = fechaHoraLlegada;
         this.precio = precio;
         this.frecuencia = frecuencia;
+
     }
+
+
 }
