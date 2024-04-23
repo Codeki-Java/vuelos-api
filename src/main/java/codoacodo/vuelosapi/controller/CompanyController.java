@@ -20,10 +20,15 @@ public class CompanyController {
     public List<Company> getAllCompanies(){
         return companyService.getAllCompanies();
     }
-//Todo: replicar la excepcion lanzada en delete para que lance la misma excepcion aca
+    //Se replicó la excepcion lanzada en delete para que lance la misma excepcion acá. Se cambio el tipo de objeto que retorna, de Optional a String
     @GetMapping("/{id}")
-    public Optional<Company> getCompanyById(@PathVariable Long id) {
-        return companyService.getCompanyById(id);
+    public String getCompanyById(@PathVariable Long id) {
+        try {
+            return String.valueOf(companyService.getCompanyById(id));
+        } catch (ResourceNotFoundException e) {
+            System.out.println(e.getMessage());
+            return "No se encontró la compañía";
+        }
     }
 
     @PostMapping("/addcompany")
@@ -38,7 +43,7 @@ public class CompanyController {
             return "Compañia borrada correctamente";
         } catch (ResourceNotFoundException e){
             System.out.println(e.getMessage());;
-            return "No se encontró la compañia";
+            return "No se encontró la compañía";
         }
 
     }

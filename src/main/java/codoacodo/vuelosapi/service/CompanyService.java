@@ -23,8 +23,8 @@ public class CompanyService {
         companyRepository.save(company);
     }
 
-    public Optional<Company> getCompanyById(Long id) {
-        return companyRepository.findById(id);
+    public Company getCompanyById(Long id) throws ResourceNotFoundException {
+        return companyRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Company","id", id));
     }
 
     public void deleteCompany(Long id) throws ResourceNotFoundException {
