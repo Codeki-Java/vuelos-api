@@ -89,11 +89,11 @@ public class FlightService {
     }
 
     private double getDolarPrice() {
-         Dolar dolar = flightUtils.fetchDolar();
+         Dolar dolar = flightConfiguration.fetchDolar();
          return dolar.getPromedio();
     }
 
     public List<Dolar> getAllDolars() {
-         return List.of(flightUtils.fetchAllDolars());
+         return List.of(flightConfiguration.fetchAllDolars());
     }
 }

@@ -1,5 +1,6 @@
 package codoacodo.vuelosapi.utils;
 
+import codoacodo.vuelosapi.configuration.FlightConfiguration;
 import codoacodo.vuelosapi.model.Company;
 import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
@@ -17,6 +18,8 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 class FlightUtilsTest {
     private FlightUtils flightUtils;
+
+    private FlightConfiguration flightConfiguration;
 
     @BeforeEach
     void setUp(){
@@ -92,12 +95,12 @@ class FlightUtilsTest {
         dummyDolar.setVenta(1000.00);
         dummyDolar.setCompra(1200.00);
 
-        FlightUtils mockedFlightUtils = mock(FlightUtils.class); //creo un objeto simulado de FlightUtils
+        FlightConfiguration mockedFlightConfiguration = mock(FlightConfiguration.class); //creo un objeto simulado de FlightUtils
 
-        when(mockedFlightUtils.fetchDolar()).thenReturn(dummyDolar);
+        when(mockedFlightConfiguration.fetchDolar()).thenReturn(dummyDolar);
 
         //Llamo la funcionalidad
-        Dolar dolar = mockedFlightUtils.fetchDolar();
+        Dolar dolar = mockedFlightConfiguration.fetchDolar();
 
         //Verificaciones
       //  assertEquals(1100, dolar.getPromedio());
