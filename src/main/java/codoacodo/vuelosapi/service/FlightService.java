@@ -11,7 +11,6 @@ import codoacodo.vuelosapi.repository.FlightRepository;
 import codoacodo.vuelosapi.utils.FlightUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +36,7 @@ public class FlightService {
         return flightUtils.flightMapper(flights, dolarPrice);
 
     }
-//Todo: agregar Company Long id en la creacion del vuelo
+
     public void crearVuelo(Flight flight, Long companyId) {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new ResourceNotFoundException("flight", "id", companyId));
@@ -61,7 +60,6 @@ public class FlightService {
     public List<Flight> getOffers(Integer offerPrice) {
         //Traigo todos los vuelos
         List<Flight> flights= flightRepository.findAll();
-
         return flightUtils.detectOffers(flights, offerPrice);
     }
 
@@ -84,7 +82,7 @@ public class FlightService {
         return flightByOrigen;
     }*/
 
-     public List<Flight> getByOrigenAndDestino(String origen, String destino){
+    public List<Flight> getByOrigenAndDestino(String origen, String destino){
         return flightRepository.findByOrigenAndDestino(origen, destino);
     }
 

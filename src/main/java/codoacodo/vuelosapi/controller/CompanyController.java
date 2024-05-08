@@ -5,7 +5,6 @@ import codoacodo.vuelosapi.model.Company;
 import codoacodo.vuelosapi.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +44,6 @@ public class CompanyController {
             System.out.println(e.getMessage());;
             return "No se encontró la compañía";
         }
-
     }
 
     @PutMapping("/updatecompany")

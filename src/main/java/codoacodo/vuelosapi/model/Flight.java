@@ -33,17 +33,4 @@ public class Flight {
         this.frecuencia = frecuencia;
 
     }
-
-/* VER SI ES NECESARIO ESTE CONSTRUCTOR!
-    public Flight(String origen, String destino, String fechaHoraSalida, String fechaHoraLlegada, double precio, String frecuencia, Company company) {
-        this.origen = origen;
-        this.destino = destino;
-        this.fechaHoraSalida = fechaHoraSalida;
-        this.fechaHoraLlegada = fechaHoraLlegada;
-        this.precio = precio;
-        this.frecuencia = frecuencia;
-        this.company = company;
-    }
-
- */
 }

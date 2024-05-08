@@ -1,13 +1,11 @@
 package codoacodo.vuelosapi.controller;
 
-import codoacodo.vuelosapi.model.Company;
 import codoacodo.vuelosapi.model.Dolar;
 import codoacodo.vuelosapi.model.Flight;
 import codoacodo.vuelosapi.model.FlightDto;
 import codoacodo.vuelosapi.service.FlightService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +44,6 @@ public class FlightController {
         return flightService.actualizarVuelo(flight);
     }
 
-
     @GetMapping("/ofertas")
     public List<Flight> getOffers(@RequestParam (name="precio") int offerPrice) {
         return flightService.getOffers(offerPrice);
@@ -66,7 +63,5 @@ public class FlightController {
     public List<Dolar> getAllDolars(){
         return flightService.getAllDolars();
     }
-
-
 
 }
