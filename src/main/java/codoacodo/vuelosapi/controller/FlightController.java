@@ -29,8 +29,8 @@ public class FlightController {
     }
 
     //Paso el vuelo por el body del JSON y el companyId por parámetro
-    @PostMapping("/agregar")
-    public void createFlight(@RequestBody Flight flight, @RequestParam Long companyId) {
+    @PostMapping("/agregar/{companyId}")
+    public void createFlight(@RequestBody Flight flight, @PathVariable Long companyId) {
         flightService.crearVuelo(flight, companyId);
     }
 

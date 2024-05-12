@@ -29,8 +29,4 @@ public class FlightUtils {
                         f.getPrecio() * price))
                 .collect(Collectors.toList());
     }
-
-
-
-
 }

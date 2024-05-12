@@ -9,7 +9,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
 import java.util.ArrayList;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -80,7 +79,6 @@ class FlightUtilsTest {
         //verifico si el primer FlightDto tiene id 1
         assertEquals(1, flightDto.getId());
         assertEquals(flight1.getPrecio() * dolarPrice, flightDto.getConvertedPrice());
-
     }
 
     @Test
@@ -95,7 +93,8 @@ class FlightUtilsTest {
         dummyDolar.setVenta(1000.00);
         dummyDolar.setCompra(1200.00);
 
-        FlightConfiguration mockedFlightConfiguration = mock(FlightConfiguration.class); //creo un objeto simulado de FlightUtils
+        //creo un objeto simulado de FlightUtils
+        FlightConfiguration mockedFlightConfiguration = mock(FlightConfiguration.class);
 
         when(mockedFlightConfiguration.fetchDolar()).thenReturn(dummyDolar);
 

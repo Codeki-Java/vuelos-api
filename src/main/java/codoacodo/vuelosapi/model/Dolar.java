@@ -1,10 +1,7 @@
 package codoacodo.vuelosapi.model;
 
 import lombok.Data;
-
 import java.time.LocalDateTime;
-
-
 
 @Data
 public class Dolar {

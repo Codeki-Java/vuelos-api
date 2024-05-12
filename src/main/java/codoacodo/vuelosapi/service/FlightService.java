@@ -34,13 +34,16 @@ public class FlightService {
         double dolarPrice = getDolarPrice();
         List<Flight> flights = flightRepository.findAll();
         return flightUtils.flightMapper(flights, dolarPrice);
-
     }
 
     public void crearVuelo(Flight flight, Long companyId) {
         Company company = companyRepository.findById(companyId)
                 .orElseThrow(() -> new ResourceNotFoundException("flight", "id", companyId));
+
+        //seteo compañia
         flight.setCompany(company);
+
+        //guardo el vuelo
         flightRepository.save(flight);
     }
 
